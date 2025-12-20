@@ -1,0 +1,1 @@
+Change make_data to take in dimensions instead of a file. 
