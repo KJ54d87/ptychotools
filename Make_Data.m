@@ -1,4 +1,4 @@
-%Creates testing dp for rotate, specifically, puts a white rectangle on the
+%Creates test diffraction pattern to test preprocessing tools, specifically, puts a white rectangle on the
 %left of dp
 
 ds_file = "E:\output\N30_47_25_pristine_np1_003_300kV_10mX_21_pm_30mrad_4pA_CL370mm_5-nmnm_rotated-50.hdf5"; % Your file here
@@ -29,4 +29,5 @@ end
 %Make a new h5file with rotated probes
 copyfile(ds_file, save_file_full_path)
 %h5create(save_file_full_path, ds_path, size(data))
+
 h5write(save_file_full_path, ds_path, data)
