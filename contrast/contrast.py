@@ -18,8 +18,8 @@ with Image.open(IMG) as sample:
         #draw.circle(pt, 6, width=1 , outline="blue")
     
     mesh = generate_circle_mesh(290, 293, 4)
-    
-    draw.point(mesh, fill = "red")
+    print(mesh)
+    draw.point(mesh.tolist(), fill = "red")
     
     #so apparently I can only draw one thing at a time. 
     #This program is curse
