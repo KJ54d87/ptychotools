@@ -15,14 +15,5 @@ def generate_mesh(size: int, x: float, y: float, V1_length: float, V1_degree: fl
 
     big_mesh = np.array([POINT1+mesh_basis[0]*i+mesh_basis[1]*j for i in range(V1_min, V1_max) for j in range(V2_
     
-    #above = big_mesh[:, 1] >= 0
-    #Bbelow = big_mesh[:, 1] < size
-    #Bleft = big_mesh[:, 0] >= 0
-    #right = big_mesh[:, 0] < size
-    
-    #keep = np.logical_and(np.logical_and(above,below), np.logical_and(left, right))
-
-    #cropped_mesh = big_mesh[keep]
-    
     return big_mesh
 
