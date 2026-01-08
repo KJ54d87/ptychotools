@@ -13,7 +13,7 @@ frames = 24
 contrast_function = RMS #Options are(will be) Michelsons, RMS, max_intensity
 size = 480
 
-def make_map(file, save_name):
+def make_map(file):
     sample = file
     sample = sample.convert("rgb") #convert to rgb so we can draw
     sample = Image.fromarray(np.array(sample)) # wipe meta data so we can draw multiple colors
@@ -78,7 +78,7 @@ def make_map(file, save_name):
         #so apparently I can only draw one thing at a time.
         #This library is cursed
         #bruh
-    sample.save(save_name)
+    return sample
 
 def run():
     with Image.open(IMG) as sample:
@@ -86,10 +86,12 @@ def run():
             os.mkdir(dir_name)
         except Exception:
             pass
+        finished_frames=[]
         for i in range(1,frames):
             input = sample.copy()
-            make_map(input, f"{dir_name}/frame{i:0=2}.tiff")
+            finished_frames.append(make_map(input))
             sample.seek(sample.tell()+1)
+        finished_frames[0].save(f"{dir_name}/processed.tiff", append_images=finished_frames[1:])
 
 
 if __name__ == "__main__":
