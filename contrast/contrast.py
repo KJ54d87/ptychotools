@@ -1,3 +1,4 @@
+import os
 import io
 from PIL import Image, ImageDraw, ImageColor
 import numpy as np
@@ -7,16 +8,16 @@ from generate_mesh import generate_mesh, generate_circle_mesh
 from calculate_intensities import intensity_contrast, luminence_contrast, michelsons_contrast, RMS
 
 IMG = "obj_phase_roi_Niter120.tiff"
+dir_name = "test_tiff"
 frames = 24
 contrast_function = RMS #Options are(will be) Michelsons, RMS, max_intensity
 size = 480
 
-with Image.open(IMG) as sample:
-    
-
-def map(file, save_name)
+def make_map(file, save_name):
+    sample = file
     sample = sample.convert("rgb") #convert to rgb so we can draw
     sample = Image.fromarray(np.array(sample)) # wipe meta data so we can draw multiple colors
+    # the above two lines are necessary for the drawing to work. Don't question it trust
     #sample = sample.convert("rgb")
     draw = ImageDraw.Draw(sample)
     for col in range(-6 ,10):
@@ -77,7 +78,19 @@ def map(file, save_name)
         #so apparently I can only draw one thing at a time.
         #This library is cursed
         #bruh
+    sample.save(save_name)
 
-    sample.save("Results/michelsons_contrast_raw.png")
+def run():
+    with Image.open(IMG) as sample:
+        try:
+            os.mkdir(dir_name)
+        except Exception:
+            pass
+        for i in range(1,frames):
+            input = sample.copy()
+            make_map(input, f"{dir_name}/frame{i:0=2}.tiff")
+            sample.seek(sample.tell()+1)
 
 
+if __name__ == "__main__":
+    run()
