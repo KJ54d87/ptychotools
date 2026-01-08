@@ -12,12 +12,20 @@ contrast_function = RMS #Options are(will be) Michelsons, RMS, max_intensity
 size = 480
 
 with Image.open(IMG) as sample:
+    
+
+def map(file, save_name)
     sample = sample.convert("rgb") #convert to rgb so we can draw
     sample = Image.fromarray(np.array(sample)) # wipe meta data so we can draw multiple colors
     #sample = sample.convert("rgb")
     draw = ImageDraw.Draw(sample)
     for col in range(-6 ,10):
-        mesh = generate_mesh(4, 290, 293, 13.7, 2.9, col, col+1, 13.7, 111.7, -10, 6)
+        potenital_points = generate_mesh(4, 290, 293, 13.7, 2.9, col, col+1, 13.7, 111.7, -20, 15)
+        mesh = []
+        for point in potenital_points:
+            if point[0] >= 0 and point[0] < size and point[1] >= 0 and point[1]<size:
+                mesh.append(point)
+
         #for pt in mesh:
         #    draw.circle(pt, 6, width=1 , outline="blue")
 
@@ -25,7 +33,7 @@ with Image.open(IMG) as sample:
         #    print(mesh[i])
 
         #generare numpy list
-        circles = [generate_circle_mesh(mesh[i][0], mesh[i][1], 7) for i in range(len(mesh))]
+        circles = [generate_circle_mesh(mesh[i][0], mesh[i][1], 6) for i in range(len(mesh))]
 
         circles_data = []
         for circle in circles:
@@ -70,6 +78,6 @@ with Image.open(IMG) as sample:
         #This library is cursed
         #bruh
 
-    sample.save("michelsons_contrast_raw.png")
+    sample.save("Results/michelsons_contrast_raw.png")
 
 
