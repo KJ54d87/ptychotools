@@ -1,1 +1,2 @@
-Various automation scripts written for the DeepEM lab. 
+Various automation scripts written by Kang Ji for the DeepEM lab. 
+
